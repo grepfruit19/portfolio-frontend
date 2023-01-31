@@ -3,9 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./routes/home";
 import Covid from "./routes/covid";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Covid />,
+  },
   {
     path: "/covid",
     element: <Covid />,

@@ -11,6 +11,8 @@ import {
 } from "recharts";
 import { useForm } from "react-hook-form";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const styles = {
   parent: {
     display: "flex",
@@ -38,7 +40,6 @@ function Graph(props) {
   const [barKey, setBarKey] = useState("daily_vaccinations");
   // Maximum value of Y axis
   const [yMax, setYMax] = useState(100000);
-  const [graphHeader, setGraphHeader] = useState("");
 
   const watchAllValues = watch();
 
@@ -60,7 +61,7 @@ function Graph(props) {
         try {
           res = await axios({
             method: "get",
-            url: "http://127.0.0.1:5000/vaccinations/daily",
+            url: `${BACKEND_URL}/vaccinations/daily`,
             params: {
               start_date: watchAllValues.startDate,
               end_date: watchAllValues.endDate,
@@ -81,7 +82,7 @@ function Graph(props) {
         try {
           res = await axios({
             method: "get",
-            url: "http://127.0.0.1:5000/vaccinations/by-state",
+            url: `${BACKEND_URL}/vaccinations/by-state`,
           });
           setXKey("location");
           setBarKey("people_fully_vaccinated_per_hundred");
@@ -103,7 +104,7 @@ function Graph(props) {
         try {
           res = await axios({
             method: "get",
-            url: "http://127.0.0.1:5000/vaccinations/by-state",
+            url: `${BACKEND_URL}/vaccinations/by-state`,
           });
           setXKey("location");
           setBarKey("total_vaccinations_per_hundred");
