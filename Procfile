@@ -1,1 +1,1 @@
-npx serve -s build
+npm run start
