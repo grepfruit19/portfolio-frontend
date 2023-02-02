@@ -191,8 +191,11 @@ export default function Covid() {
         <div>
           <h1>Covid Data Visualization</h1>
           <p>
-            I pulled some Covid vaccination data, and was curious about a few
-            questions, like:
+            I wanted to put something together just to have some easily
+            accessible code samples, since I'm on the job hunt. Looking through
+            some random data sets, I saw one with Covid vaccination numbers, and
+            thought it'd be interesting to poke around. Click the links below
+            for some graphs that answer some questions I had, like:
           </p>
           <p
             style={styles.fauxLink}
@@ -222,10 +225,19 @@ export default function Covid() {
           <Graph graphType={graphType} />
 
           <p>
-            The front end was done using React, react-hook-form and recharts.
+            I wrote the front end using React/Next.js, and made the backend
+            webserver using Python Flask. Both servers are hosted on Heroku.
           </p>
           <p>
-            The backend is a Python Flask webserver that pulls from PostgreSQL.
+            The front end code can be found{" "}
+            <a href={"https://github.com/grepfruit19/portfolio-frontend"}>
+              here
+            </a>
+            , and the backend code can be found{" "}
+            <a href={"https://github.com/grepfruit19/portfolio-backend"}>
+              here
+            </a>
+            .
           </p>
           <p>
             Data was found{" "}
@@ -234,9 +246,9 @@ export default function Covid() {
                 "https://www.kaggle.com/datasets/sandhyakrishnan02/united-states-covid19-vaccinations"
               }
             >
-              here
+              on Kaggle
             </a>
-            .
+            , and I migrated the data to a PostgreSQL database.
           </p>
         </div>
       </div>

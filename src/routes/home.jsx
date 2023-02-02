@@ -15,34 +15,20 @@ export default function Home() {
 
         <div class="col-right" id="about">
           <h3>Who I Am:</h3>
-          <ul>
+          {/* <ul>
             <li>Someone with a strong CS background.</li>
             <li>Someone with a foundation in web development.</li>
             <li>Someone versatile who can tackle many problems</li>
-          </ul>
+          </ul> */}
 
           <h3>Things I've Made:</h3>
-          <ul>
+          {/* <ul>
             <li>
               <a href="/covid">I </a>
             </li>
-          </ul>
-          <ul>
-            <li>
-              <li>
-                <a href="https://github.com/orcaprotocol/orca-sdk">
-                  At my previous job I wrote the SDK that powers the entire
-                  front end!
-                </a>
-              </li>
-              <ul>
-                <li>
-                  I'm quite proud of that one, you can check the documentation
-                  out{" "}
-                  <a href="https://orcaprotocol.github.io/orca-sdk/">here</a>
-                </li>
-              </ul>
-            </li>
+          </ul> */}
+          {/* <ul>
+            <li>Arrrgh</li>
             <li>
               <a href="https://github.com/willikers19/summarizer">
                 Automatic Article Summarizer
@@ -66,9 +52,9 @@ export default function Home() {
                 Hearthstone Design Plan
               </a>
             </li>
-          </ul>
+          </ul> */}
 
-          <h3>Contact Me:</h3>
+          {/* <h3>Contact Me:</h3>
           <ul>
             <li>wtk219 (at) nyu (dot) edu</li>
             <li>
@@ -79,7 +65,7 @@ export default function Home() {
                 LinkedIn
               </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </>
