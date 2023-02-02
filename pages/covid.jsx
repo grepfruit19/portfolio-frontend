@@ -12,19 +12,6 @@ import {
 import { useForm } from "react-hook-form";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-console.log(BACKEND_URL);
-
-const styles = {
-  parent: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  fauxLink: {
-    cursor: "pointer",
-    color: "blue",
-    textDecoration: "underline",
-  },
-};
 
 // Handles rendering of a graph based on a given state
 function Graph(props) {
@@ -55,6 +42,7 @@ function Graph(props) {
     return highest;
   };
 
+  // Handles data fetching based on graph type.
   useEffect(() => {
     if (graphType === 0) {
       async function fetchData() {
@@ -139,10 +127,9 @@ function Graph(props) {
         <>
           <h2>Vaccination rates over time (New York State)</h2>
           <form>
-            <p>Date ranges</p>
+            Date ranges{" "}
             <input label={"startDate"} type="date" {...register("startDate")} />
             <input label={"endDate"} type="date" {...register("endDate")} />
-            {/* <input type="submit" /> */}
           </form>
         </>
       )}
@@ -165,18 +152,56 @@ function Graph(props) {
         The rerender triggers the animation for the graph, where it otherwise wouldn't.
       */}
       <div key={Math.random()}>
-        <BarChart width={850} height={500} data={data}>
+        <BarChart width={750} height={500} data={data}>
           <CartesianGrid />
           <XAxis dataKey={xKey} />
           <YAxis domain={[0, yMax]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey={barKey} fill="#33b0ff" />
+          <Bar dataKey={barKey} fill="#e91e63" />
         </BarChart>
       </div>
     </>
   );
 }
+
+const covidStyles = {
+  parent: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  tableParent: {
+    display: "flex",
+    maxWidth: "75%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  tableLeft: {
+    width: "250px",
+    maxWidth: "250px",
+  },
+  tableRight: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  footer: {
+    maxWidth: "60%",
+  },
+  fauxLink: {
+    cursor: "pointer",
+    color: "#e91e63",
+    textDecoration: "underline",
+  },
+  fauxLinkBold: {
+    cursor: "pointer",
+    color: "#e91e63",
+    textDecoration: "underline",
+    fontWeight: "bold",
+  },
+};
 
 export default function Covid() {
   const [graphType, setGraphType] = useState(0);
@@ -187,43 +212,63 @@ export default function Covid() {
 
   return (
     <>
-      <div id="sidebar" style={styles.parent}>
-        <div>
-          <h1>Covid Data Visualization</h1>
-          <p>
-            I wanted to put something together just to have some easily
-            accessible code samples, since I'm on the job hunt. Looking through
-            some random data sets, I saw one with Covid vaccination numbers, and
-            thought it'd be interesting to poke around. Click the links below
-            for some graphs that answer some questions I had, like:
-          </p>
-          <p
-            style={styles.fauxLink}
-            onClick={() => {
-              handleGraphTypeClick(0);
-            }}
-          >
-            What did vaccinations rates over time look like?
-          </p>
-          <p
-            style={styles.fauxLink}
-            onClick={() => {
-              handleGraphTypeClick(1);
-            }}
-          >
-            What states are the most vaccinated?
-          </p>
-          <p
-            style={styles.fauxLink}
-            onClick={() => {
-              handleGraphTypeClick(2);
-            }}
-          >
-            Which states have the most doses per person administered?
-          </p>
+      <div style={covidStyles.parent}>
+        <h1>Covid Data Visualization</h1>
+        <div style={covidStyles.tableParent}>
+          <section style={covidStyles.tableLeft}>
+            <p>
+              I wanted to put together some compact/easily readable code
+              samples. Looking through some random data sets, I saw one with
+              Covid vaccination numbers, and thought it'd be interesting to poke
+              around.{" "}
+            </p>
+            <p>
+              Click the links below for some graphs that answer some questions I
+              had, like:
+            </p>
+            <p
+              style={
+                graphType === 0
+                  ? covidStyles.fauxLinkBold
+                  : covidStyles.fauxLink
+              }
+              onClick={() => {
+                handleGraphTypeClick(0);
+              }}
+            >
+              What did vaccinations rates over time look like?
+            </p>
+            <p
+              style={
+                graphType === 1
+                  ? covidStyles.fauxLinkBold
+                  : covidStyles.fauxLink
+              }
+              onClick={() => {
+                handleGraphTypeClick(1);
+              }}
+            >
+              What states are the most vaccinated?
+            </p>
+            <p
+              style={
+                graphType === 2
+                  ? covidStyles.fauxLinkBold
+                  : covidStyles.fauxLink
+              }
+              onClick={() => {
+                handleGraphTypeClick(2);
+              }}
+            >
+              Which states have the most doses per person administered?
+            </p>
+          </section>
 
-          <Graph graphType={graphType} />
-
+          <section style={covidStyles.tableRight}>
+            <Graph graphType={graphType} />
+          </section>
+        </div>
+        <footer style={covidStyles.footer}>
           <p>
             I wrote the front end using React/Next.js, and made the backend
             webserver using Python Flask. Both servers are hosted on Heroku.
@@ -250,7 +295,7 @@ export default function Covid() {
             </a>
             , and I migrated the data to a PostgreSQL database.
           </p>
-        </div>
+        </footer>
       </div>
     </>
   );
