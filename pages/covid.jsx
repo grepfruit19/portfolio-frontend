@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   CartesianGrid,
+  ResponsiveContainer,
 } from "recharts";
 import { useForm } from "react-hook-form";
 
@@ -151,8 +152,8 @@ function Graph(props) {
       {/* Adding a random key here to force a rerender of the graph.
         The rerender triggers the animation for the graph, where it otherwise wouldn't.
       */}
-      <div key={Math.random()}>
-        <BarChart width={750} height={500} data={data}>
+      <ResponsiveContainer height={350} width="100%">
+        <BarChart data={data}>
           <CartesianGrid />
           <XAxis dataKey={xKey} />
           <YAxis domain={[0, yMax]} />
@@ -160,7 +161,7 @@ function Graph(props) {
           <Legend />
           <Bar dataKey={barKey} fill="#e91e63" />
         </BarChart>
-      </div>
+      </ResponsiveContainer>
     </>
   );
 }
@@ -173,14 +174,13 @@ const covidStyles = {
   },
   tableParent: {
     display: "flex",
-    maxWidth: "75%",
+    width: "75%",
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
   },
   tableLeft: {
     width: "250px",
-    maxWidth: "250px",
   },
   tableRight: {
     display: "flex",
