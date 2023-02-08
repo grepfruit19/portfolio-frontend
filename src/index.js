@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./routes/home";
+import "react-tooltip/dist/react-tooltip.css";
 import Covid from "../pages/covid";
+import { Raleway } from "@next/font/google";
 
 const router = createBrowserRouter([
   {
