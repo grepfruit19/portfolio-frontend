@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Tooltip } from "react-tooltip";
 import {
   Accordion,
@@ -89,10 +90,11 @@ export default function Home() {
               <h1 style={styles.name}>Will Kim</h1>
             </div>
             <div>
-              <h1>👋 Hi!</h1>
+              <h1>👋 Hi! Thanks for visiting!</h1>
               Thanks for visiting my page. If you're here to check out some code
-              samples, you can go here! I put up a simple little web app, and
-              also have links to some other work I've done in the past.
+              samples, you can go <Link href="/covid">here</Link>! I put up a
+              simple little web app, and also have links to some other work I've
+              done in the past.
             </div>
           </section>
 
@@ -118,8 +120,8 @@ export default function Home() {
                         I've also used Python with Flask/Django in the past
                       </li>
                       <li>
-                        I have a bachelor's in computer science and I know how
-                        to use it
+                        I have a bachelor's in computer science (and I know how
+                        to use it!)
                       </li>
                     </ul>
                   </AccordionDetails>
@@ -147,10 +149,9 @@ export default function Home() {
                         atypical mocks
                       </li>
                       <li>Setup monitoring tools like Sentry</li>
-                      <li>Setup memory caches like Redis</li>
+                      <li>Setup and worked with memory caches like Redis</li>
                       <li>
-                        Procuring and managing external services like AWS S3,
-                        Azure blob stores, Redis caches, etc.
+                        Worked with cloud computing services like Azure and AWS
                       </li>
                     </ul>
                   </AccordionDetails>
@@ -172,11 +173,12 @@ export default function Home() {
                       </li>
                       <li>
                         I’ve also become very good at debugging, since the
-                        ecosystem is so new. One time I found a bug in our code
-                        that had to do with the way individual bytes are stored
-                        in memory, very similar to [C struct
-                        packing](http://www.catb.org/esr/structure-packing/) if
-                        you’re familiar with that
+                        ecosystem is so new. One time I found a out of memory
+                        bug in our code because we were{" "}
+                        <a href="http://www.catb.org/esr/structure-packing/">
+                          packing bits in our structs inefficiently
+                        </a>
+                        . Glad I remembered that from my CS classes!
                       </li>
                     </ul>
                   </AccordionDetails>
@@ -196,23 +198,44 @@ export default function Home() {
                       </li>
                       <li>
                         I created a shared documentation repo to help onboard
-                        new developers and make sure everyone’s on the same team
+                        new developers and make sure everyone’s on the same page
                       </li>
                       <li>
                         I really enjoy both being mentored and mentoring others
                       </li>
                       <li>
-                        Maybe some day I'd like to teach computer science in one
-                        way or another
+                        Some day I'd like to teach computer science in some
+                        capacity
+                      </li>
+                    </ul>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion
+                  expanded={activeAccordion === 4}
+                  onChange={handleChange(4)}
+                >
+                  <AccordionSummary sx={styles.accordionSummary}>
+                    I also do some other stuff!
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <ul>
+                      <li>I’ve played guitar since high school</li>
+                      <li>I've also been break dancing for nearly a decade!</li>
+                      <li>
+                        I am grappling with the fact that a decade is becoming a
+                        smaller percentage of my life as I age
+                      </li>
+                      <li>I also started playing volleyball recently!</li>
+                      <li>
+                        I would be a great addition to any company volleyball
+                        team, or rock band (or some combination of the two)
                       </li>
                     </ul>
                   </AccordionDetails>
                 </Accordion>
               </div>
             </div>
-            <div>If you'd like the above in a formal resume, click here.</div>
-
-            <div>Lastly, here's some non-work things about me!</div>
+            {/* <div>If you'd like the above in a formal resume, click here.</div> */}
           </section>
         </Paper>
       </div>
