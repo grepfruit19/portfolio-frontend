@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Paper } from "@mui/material";
 import {
   BarChart,
   XAxis,
@@ -169,8 +170,20 @@ function Graph(props) {
 const covidStyles = {
   parent: {
     display: "flex",
-    alignItems: "center",
+    padding: "3rem",
     flexDirection: "column",
+    alignItems: "center",
+  },
+  paper: {
+    width: "85%",
+    maxWidth: "1100px",
+    padding: "3rem",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "40rem",
+    flexWrap: "wrap",
   },
   tableParent: {
     display: "flex",
@@ -213,89 +226,101 @@ export default function Covid() {
   return (
     <>
       <div style={covidStyles.parent}>
-        <h1>Covid Data Visualization</h1>
-        <div style={covidStyles.tableParent}>
-          <section style={covidStyles.tableLeft}>
-            <p>
-              I wanted to put together some compact/easily readable code
-              samples. Looking through some random data sets, I saw one with
-              Covid vaccination numbers, and thought it'd be interesting to poke
-              around.{" "}
-            </p>
-            <p>
-              Click the links below for some graphs that answer some questions I
-              had, like:
-            </p>
-            <p
-              style={
-                graphType === 0
-                  ? covidStyles.fauxLinkBold
-                  : covidStyles.fauxLink
-              }
-              onClick={() => {
-                handleGraphTypeClick(0);
-              }}
-            >
-              What did vaccinations rates over time look like?
-            </p>
-            <p
-              style={
-                graphType === 1
-                  ? covidStyles.fauxLinkBold
-                  : covidStyles.fauxLink
-              }
-              onClick={() => {
-                handleGraphTypeClick(1);
-              }}
-            >
-              What states are the most vaccinated?
-            </p>
-            <p
-              style={
-                graphType === 2
-                  ? covidStyles.fauxLinkBold
-                  : covidStyles.fauxLink
-              }
-              onClick={() => {
-                handleGraphTypeClick(2);
-              }}
-            >
-              Which states have the most doses per person administered?
-            </p>
-          </section>
+        <Paper style={covidStyles.paper}>
+          <h1>Covid Data Visualization</h1>
+          <div style={covidStyles.tableParent}>
+            <section style={covidStyles.tableLeft}>
+              <p>
+                I wanted to put together some compact/easily readable code
+                samples. Looking through some random data sets, I saw one with
+                Covid vaccination numbers, and thought it'd be interesting to
+                poke around.{" "}
+              </p>
+              <p>
+                Click the links below for some graphs that answer some questions
+                I had, like:
+              </p>
+              <p
+                style={
+                  graphType === 0
+                    ? covidStyles.fauxLinkBold
+                    : covidStyles.fauxLink
+                }
+                onClick={() => {
+                  handleGraphTypeClick(0);
+                }}
+              >
+                What did vaccinations rates over time look like?
+              </p>
+              <p
+                style={
+                  graphType === 1
+                    ? covidStyles.fauxLinkBold
+                    : covidStyles.fauxLink
+                }
+                onClick={() => {
+                  handleGraphTypeClick(1);
+                }}
+              >
+                What states are the most vaccinated?
+              </p>
+              <p
+                style={
+                  graphType === 2
+                    ? covidStyles.fauxLinkBold
+                    : covidStyles.fauxLink
+                }
+                onClick={() => {
+                  handleGraphTypeClick(2);
+                }}
+              >
+                Which states have the most doses per person administered?
+              </p>
+            </section>
 
-          <section style={covidStyles.tableRight}>
-            <Graph graphType={graphType} />
-          </section>
-        </div>
-        <footer style={covidStyles.footer}>
-          <p>
-            I wrote the front end using React/Next.js, and made the backend
-            webserver using Python Flask. Both servers are hosted on Heroku.
-          </p>
-          <p>
-            The front end code can be found{" "}
-            <a href={"https://github.com/grepfruit19/portfolio-frontend"}>
-              here
-            </a>
-            , and the backend code can be found{" "}
-            <a href={"https://github.com/grepfruit19/portfolio-backend"}>
-              here
-            </a>
-            .
-          </p>
-          <p>
-            Data was found{" "}
-            <a
-              href={
-                "https://www.kaggle.com/datasets/sandhyakrishnan02/united-states-covid19-vaccinations"
-              }
-            >
-              on Kaggle
-            </a>
-            , and I migrated the data to a PostgreSQL database.
-          </p>
-        </footer>
+            <section style={covidStyles.tableRight}>
+              <Graph graphType={graphType} />
+            </section>
+          </div>
+          <footer style={covidStyles.footer}>
+            <p>
+              I wrote the front end using React/Next.js, and made the backend
+              webserver using Python Flask. Both servers are hosted on Heroku.
+            </p>
+            <p>
+              The front end code can be found{" "}
+              <a href={"https://github.com/grepfruit19/portfolio-frontend"}>
+                here
+              </a>
+              , and the backend code can be found{" "}
+              <a href={"https://github.com/grepfruit19/portfolio-backend"}>
+                here
+              </a>
+              .
+            </p>
+            <p>
+              If you're interested in some more complex work I've done, how
+              about the{" "}
+              <a href={"https://github.com/orcaprotocol/orca-sdk"}>
+                open source SDK I developed
+              </a>
+              ? That SDK integrates data from several different sources,
+              including a GraphQL server, and wraps them in a single interface.
+              I'd start with the Pod object.
+            </p>
+            <p>
+              Data was found{" "}
+              <a
+                href={
+                  "https://www.kaggle.com/datasets/sandhyakrishnan02/united-states-covid19-vaccinations"
+                }
+              >
+                on Kaggle
+              </a>
+              , and I migrated the data to a PostgreSQL database.
+            </p>
+          </footer>
+        </Paper>
       </div>
     </>
   );

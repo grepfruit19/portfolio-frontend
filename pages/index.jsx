@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Tooltip } from "react-tooltip";
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Paper,
-  Typography,
 } from "@mui/material";
-
 import "react-tooltip/dist/react-tooltip.css";
 import { useState } from "react";
 
@@ -23,9 +20,20 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
   },
+  paper: {
+    width: "85%",
+    maxWidth: "1100px",
+    padding: "3rem",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "40rem",
+    flexWrap: "wrap",
+  },
   left: {
     column: {
-      width: "35%",
+      flex: 2,
     },
     header: {
       display: "flex",
@@ -34,6 +42,7 @@ const styles = {
   },
   right: {
     column: {
+      flex: 3,
       margin: "1rem",
       padding: "1rem",
       borderLeft: "1px solid",
@@ -45,18 +54,8 @@ const styles = {
     margin: "1rem",
     borderRadius: "5rem",
   },
-  paper: {
-    width: "80%",
-    padding: "3rem",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "40rem",
-  },
-  accordionParent: {
-    width: "500px",
-  },
+
+  accordionParent: {},
   accordion: {
     margin: "2rem",
   },
@@ -113,12 +112,10 @@ export default function Home() {
                   <AccordionDetails>
                     <ul>
                       <li>
-                        I've used JavaScript/TypeScript for most of that time,
-                        with React and Express as frameworks
+                        I've used TypeScript, React and Express for most of that
+                        time
                       </li>
-                      <li>
-                        I've also used Python with Flask/Django in the past
-                      </li>
+                      <li>I've also used Python with Flask/Django</li>
                       <li>
                         I have a bachelor's in computer science (and I know how
                         to use it!)
@@ -161,8 +158,7 @@ export default function Home() {
                   onChange={handleChange(2)}
                 >
                   <AccordionSummary sx={styles.accordionSummary}>
-                    A blockchain developer trying to transition out of the
-                    industry
+                    Transitioning out of blockchain
                   </AccordionSummary>
                   <AccordionDetails>
                     <ul>
@@ -204,8 +200,7 @@ export default function Home() {
                         I really enjoy both being mentored and mentoring others
                       </li>
                       <li>
-                        Some day I'd like to teach computer science in some
-                        capacity
+                        Some day I'd like to teach computer science in some way
                       </li>
                     </ul>
                   </AccordionDetails>
@@ -220,7 +215,7 @@ export default function Home() {
                   <AccordionDetails>
                     <ul>
                       <li>I’ve played guitar since high school</li>
-                      <li>I've also been break dancing for nearly a decade!</li>
+                      <li>I've also been break dancing for nearly a decade</li>
                       <li>
                         I am grappling with the fact that a decade is becoming a
                         smaller percentage of my life as I age
