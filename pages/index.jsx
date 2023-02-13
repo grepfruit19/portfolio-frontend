@@ -93,7 +93,8 @@ export default function Home() {
               Thanks for visiting my page. If you're here to check out some code
               samples, you can go <Link href="/covid">here</Link>! I put up a
               simple little web app, and also have links to some other work I've
-              done in the past.
+              done in the past. (Also this site is responsive! Try me on
+              mobile!)
             </div>
           </section>
 
@@ -169,7 +170,7 @@ export default function Home() {
                       </li>
                       <li>
                         I’ve also become very good at debugging, since the
-                        ecosystem is so new. One time I found a out of memory
+                        ecosystem is so new. One time I found an out of memory
                         bug in our code because we were{" "}
                         <a href="http://www.catb.org/esr/structure-packing/">
                           packing bits in our structs inefficiently
