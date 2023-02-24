@@ -156,8 +156,43 @@ test("getNextNode will pop an arbitrary node if distances are uninitialized", ()
 });
 
 describe("Path finding", () => {
-  test("lets see what happens lol", () => {
-    const graph = new Graph(1, 3);
-    graph.findPath(new Node(0, 0), new Node(0, 2));
+  test("Simplest case", () => {
+    // Straight line that goes from left to right
+    const graph = new Graph(3, 1);
+    const path = graph.findPath(new Node(0, 0), new Node(2, 0));
+    expect(path[0]).toEqual({ x: 0, y: 0 });
+    expect(path[1]).toEqual({ x: 1, y: 0 });
+    expect(path[2]).toEqual({ x: 2, y: 0 });
+  });
+
+  test("Navigate around a simple block", () => {
+    const graph = new Graph(3, 2);
+    // Block the immediate path.
+    graph.blockPath(new Node(0, 0), new Node(1, 0));
+    const path = graph.findPath(new Node(0, 0), new Node(2, 0));
+    expect(path[0]).toEqual({ x: 0, y: 0 });
+    expect(path[1]).toEqual({ x: 0, y: 1 });
+    expect(path[2]).toEqual({ x: 1, y: 1 });
+    expect(path[3]).toEqual({ x: 1, y: 0 });
+    expect(path[4]).toEqual({ x: 2, y: 0 });
+  });
+
+  test("No viable paths, simplest case", () => {
+    const graph = new Graph(3, 1);
+    // Block the only viable path.
+    graph.blockPath(new Node(0, 0), new Node(1, 0));
+
+    const path = graph.findPath(new Node(0, 0), new Node(2, 0));
+    expect(path).toEqual([]);
+  });
+
+  test("No viable paths, slightly harder", () => {
+    const graph = new Graph(3, 2);
+    // Block the only viable path.
+    graph.blockPath(new Node(0, 0), new Node(1, 0));
+    graph.blockPath(new Node(0, 1), new Node(1, 1));
+
+    const path = graph.findPath(new Node(0, 0), new Node(2, 0));
+    expect(path).toEqual([]);
   });
 });

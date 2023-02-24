@@ -83,7 +83,7 @@ export default class Graph {
       const belowNode = new Node(node.x, node.y + 1);
       if (!this.isBlocked(node, belowNode)) adjacentNodes.push(belowNode);
     }
-    // Also need to filter blocked paths
+    if (adjacentNodes.length === 0) throw new Error("No adjacent nodes");
     return adjacentNodes;
   }
 
@@ -103,8 +103,17 @@ export default class Graph {
 
   // Generates a path
   backtrack(parents, node) {
-    console.log("backtrackparents", parents);
-    console.log("backtracknodes", node);
+    const path = [];
+    // Include the end in the path.
+    path.push(node);
+
+    let previousNode = parents[node];
+    while (previousNode) {
+      path.push(previousNode);
+      previousNode = parents[previousNode];
+    }
+    // The path is backwards since we're backtracking.
+    return path.reverse();
   }
 
   createUnexploredSet() {
@@ -157,6 +166,7 @@ export default class Graph {
   }
 
   findPath(start, end) {
+    if (start.x === end.x && start.y === end.y) return start;
     // All Node objects should come from unexplored.
     // Using/initializing other Node objects will create reference errors
     const unexplored = this.createUnexploredSet();
@@ -165,30 +175,32 @@ export default class Graph {
 
     while (unexplored.size > 0) {
       const nextNodeValues = this.popNextNode(unexplored, distances);
-      console.log("nextNodeValues", nextNodeValues);
       const { nextNode: currentNode } = nextNodeValues;
-      console.log("currentNode", currentNode);
-      console.log("distances[currentNode]", distances[currentNode]);
 
       if (currentNode.x === end.x && currentNode.y === end.y) {
-        console.log("distances", distances);
+        const path = this.backtrack(parents, currentNode);
+        // If there is no viable path, we'll just get a node of length 1
+        // that only contains the end node. In that case we just want to return []
+        // for consistency.
+        // We cover the case where start === end in the beginning.
+        if (path.length === 1) return [];
         return this.backtrack(parents, currentNode);
       }
 
-      const adjacentNodes = this.removeExplored(
-        unexplored,
-        this.findAdjacentNodes(currentNode)
-      );
-      console.log("adjacentNodes", adjacentNodes);
-      adjacentNodes.forEach((adjacentNode) => {
-        console.log(
-          "distances[currentNode] but in the for loop",
-          distances[currentNode]
+      let adjacentNodes;
+      try {
+        adjacentNodes = this.removeExplored(
+          unexplored,
+          this.findAdjacentNodes(currentNode)
         );
+      } catch (err) {
+        if (err.message.includes("No adjacent nodes")) {
+          return [];
+        }
+      }
+      adjacentNodes.forEach((adjacentNode) => {
         const newDistance = distances[currentNode] + 1;
         const oldDistance = distances[adjacentNode];
-        console.log("newDistance", newDistance);
-        console.log("oldDistance", oldDistance);
         if (newDistance < oldDistance) {
           distances[adjacentNode] = newDistance;
           parents[adjacentNode] = currentNode;
