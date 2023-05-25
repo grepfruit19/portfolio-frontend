@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Paper } from "@mui/material";
 import Graph, { Node } from "../pathfinding/Graph";
-import { LabelList } from "recharts";
 
 const styles = {
   parent: {
@@ -143,8 +142,9 @@ export default function Pathfinding() {
           ></Row>
         );
     }
+    console.log("output", output);
     setGraphDisplay(output);
-  }, []);
+  }, [path]);
 
   return (
     <>
